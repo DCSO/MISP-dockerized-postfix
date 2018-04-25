@@ -1,0 +1,37 @@
+#!/bin/sh
+set -e
+
+POSTFIX_CONFIG="/etc/postfix/main.cf"
+SMTP_AUTH="/etc/postfix/smtp_auth"
+
+function mysed() {
+    sed -i 's,{'$1'},'$2',g' $3
+}
+# Set Environment Variables in Config
+mysed HOSTNAME $HOSTNAME $POSTFIX_CONFIG
+
+# Domain for Outgoing Mail
+mysed DOMAIN $DOMAIN $POSTFIX_CONFIG
+# Relahost to Send Mails
+mysed RELAYHOST $RELAYHOST $POSTFIX_CONFIG
+mysed RELAYHOST $RELAYHOST $SMTP_AUTH
+# RELAY User and Password
+mysed RELAY_USER $RELAY_USER $SMTP_AUTH
+mysed RELAY_PASSWORD $RELAY_PASSWORD $SMTP_AUTH
+# generate a .db file
+    postmap $SMTP_AUTH
+# cleanup
+	rm $SMTP_AUTH
+# set permissions
+	chmod 600 $SMTP_AUTH.db
+
+# Allow only MISP Docker Container Access
+mysed DOCKER_NETWORK $DOCKER_NETWORK $POSTFIX_CONFIG
+# You need to get more postfix output for a specified host normally the relayhost or misp-server
+[ $DEBUG_PEER == "none" ] || mysed DEBUG_PEER $DEBUG_PEER $POSTFIX_CONFIG
+[ $DEBUG_PEER == "none" ] && mysed DEBUG_PEER "" $POSTFIX_CONFIG
+
+rm /var/log/mail.log
+ln -s /dev/stdout /var/log/mail.log
+exec /usr/lib/postfix/master -c /etc/postfix -d 2>&1
+#tail -F /var/log/mail.log

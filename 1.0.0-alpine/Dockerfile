@@ -28,8 +28,45 @@ LABEL org.label-schema.build-date="${BUILD_DATE}" \
           org.label-schema.schema-version="1.0.0-rc1"
 
 # Install Postfix
-RUN apk add --no-cache postfix
+RUN apk add --no-cache \
+    postfix \
+    mailx \
+    libsasl \
+    ca-certificates \
+    rsyslog \
+    runit
 
-#COPY files/* /etc/postfix/
+# Hostname for the Mailserver
+ENV HOSTNAME=misp
+# Domain for Outgoing Mail
+ENV DOMAIN=example.com
+# Relahost to Send Mails
+ENV RELAYHOST=smtp.example.com:588
+# RELAY User and Password
+ENV RELAY_USER=postfix
+ENV RELAY_PASSWORD=ChangeMe
+# Allow only MISP Docker Container Access
+ENV DOCKER_NETWORK=192.168.47.0/28
+# You need to get more postfix output for a specified host normally the relayhost or misp-server
+ENV DEBUG_PEER=none
 
-CMD [ "/usr/lib/postfix/master" ]
+
+
+
+
+# Copy files to postfix container
+COPY \
+    files/main.cf* \
+    file/master.cf* \
+    files/smtp_auth \
+        /etc/postfix/
+
+COPY files/service /etc/service
+COPY files/runit_bootstrap /usr/sbin/runit_bootstrap
+COPY files/rsyslog.conf /etc/rsyslog.conf
+
+RUN chmod -R +x /usr/sbin/runit_bootstrap /etc/service
+
+STOPSIGNAL SIGKILL
+
+ENTRYPOINT ["/usr/sbin/runit_bootstrap"]
