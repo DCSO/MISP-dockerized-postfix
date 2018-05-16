@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 
 #################   MANUAL VARIABLES #################
 # path of the script
@@ -7,7 +7,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 # dockerfile name:
 DOCKERFILE_NAME=Dockerfile
 # Which Folder the script should use
-[ $1 == "dev" ] && echo "false first argument. Abort." && exit 1
+[ "$1" == "dev" ] && echo "false first argument. Abort." && exit 1
 if [ -z $1 ] ;then
     	# build all you finde
         FOLDER=( */)
