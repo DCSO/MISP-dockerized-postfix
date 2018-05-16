@@ -20,7 +20,8 @@ fi
 
 #################   AUTOMATIC VARIABLES #################
 # Find Out Git Hub Repository
-GIT_REPO="$(git remote get-url origin|sed 's/.*://'|sed 's/....$//')"
+[ -z "$(git remote get-url origin|grep git@)" ] || GIT_REPO="$(git remote get-url origin|sed 's,.*:,,'|sed 's,....$,,')"
+[ -z "$(git remote get-url origin|grep http)" ] || GIT_REPO="$(git remote get-url origin|sed 's,.*github.com/,,'|sed 's,....$,,')"
 GIT_REPO_URL="https://github.com/$GIT_REPO"
 # Dockerifle Settings
 CONTAINER_NAME="$(echo $GIT_REPO|cut -d / -f 2|tr '[:upper:]' '[:lower:]')"
