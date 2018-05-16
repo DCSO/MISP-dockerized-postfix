@@ -9,7 +9,7 @@ DOCKERFILE_NAME=Dockerfile
 # Which Folder the script should use
 [ "$1" == "dev" ] && echo "false first argument. Abort." && exit 1
 if [ -z $1 ] ;then
-    	# build all you finde
+    	# build all you find
         FOLDER=( */)
         FOLDER=( "${FOLDER[@]%/}" )
 else

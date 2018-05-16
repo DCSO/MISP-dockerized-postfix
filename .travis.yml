@@ -16,7 +16,7 @@ before_install:
 - make install
 
 script:
-- travis_retry make build v=${VERSION}
+- travis_retry make build v=${VERSION} dev=dev
 - make tags
 
 after_script:
