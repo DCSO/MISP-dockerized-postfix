@@ -1,7 +1,5 @@
 #!/bin/bash
-
-#examples:
-#lint .travis.yml
+set -xe
 
 #   travis cli
 function check_via_travis_cli(){

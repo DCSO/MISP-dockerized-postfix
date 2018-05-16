@@ -1,5 +1,6 @@
 #!/bin/bash
-set -x
+# Set an option to exit immediately if any error appears
+set -xe
 
 #################   MANUAL VARIABLES #################
 # path of the script

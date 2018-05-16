@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Set an option to exit immediately if any error appears
 set -xe
 
 # Docker Repo e.g. dcso/misp-dockerized-proxy

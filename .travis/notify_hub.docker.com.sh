@@ -1,4 +1,6 @@
 #!/bin/bash
+# Set an option to exit immediately if any error appears
+set -xe
 
 # Docker Repo e.g. dcso/misp-dockerized-proxy
 [ -z "$(git remote get-url origin|grep git@)" ] || GIT_REPO="$(git remote get-url origin|sed 's,.*:,,'|sed 's,....$,,')"

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Set an option to exit immediately if any error appears
 set -xe
 
 echo  "### Show Images before Tagging:"
