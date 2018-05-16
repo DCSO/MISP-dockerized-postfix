@@ -35,8 +35,9 @@ do
     # load Variables from configuration file
     source $DOCKERFILE_PATH/configuration.sh
     ### Add -dev to tag if dev is set as a second argument
-    [ $2 == "dev" ] && TAGS="-t $DOCKER_REPO:$FOLD-dev"
-    [ $2 == "dev" ] || TAGS="-t $DOCKER_REPO:$FOLD"
+    [ "$2" == "dev" ] && TAGS="-t $DOCKER_REPO:$FOLD-dev"
+    [ "$2" == "dev" ] || TAGS="-t $DOCKER_REPO:$FOLD"
+
     # Default Build Args
     BUILD_ARGS+="
         --build-arg RELEASE_DATE="$(date +"%Y-%m-%d")" \
