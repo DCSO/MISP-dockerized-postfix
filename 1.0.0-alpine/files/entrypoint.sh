@@ -1,32 +1,41 @@
 #!/bin/sh
 set -ex
 
-POSTFIX_CONFIG="/etc/postfix/main.cf"
-SMTP_AUTH="/etc/postfix/smtp_auth"
+POSTFIX_PATH="/etc/postfix"
+POSTFIX_CONFIG="$POSTFIX_PATH/main.cf"
+SMTP_AUTH="$POSTFIX_PATH/smtp_auth"
+GENERIC="$POSTFIX_PATH/generic_misp"
 
 function mysed() {
+    # This function replace the Keywords ($1) with the content of environment variable ($2) in the file ($3)
     sed -i 's,{'$1'},'$2',g' $3
 }
+
 # Set Environment Variables in Config
 mysed HOSTNAME $HOSTNAME $POSTFIX_CONFIG
-
 # Domain for Outgoing Mail
 mysed DOMAIN $DOMAIN $POSTFIX_CONFIG
+# Sender for local postfix outgoing Mails
+mysed SENDER_ADDRESS $SENDER_ADDRESS $GENERIC
 # Relahost to Send Mails
 mysed RELAYHOST $RELAYHOST $POSTFIX_CONFIG
 mysed RELAYHOST $RELAYHOST $SMTP_AUTH
 # RELAY User and Password
 mysed RELAY_USER $RELAY_USER $SMTP_AUTH
 mysed RELAY_PASSWORD $RELAY_PASSWORD $SMTP_AUTH
-postmap $SMTP_AUTH
 # Allow only MISP Docker Container Access
 mysed DOCKER_NETWORK $DOCKER_NETWORK $POSTFIX_CONFIG
-# You need to get more postfix output for a specified host normally the relayhost or misp-server
-[ $DEBUG_PEER == "none" ] || mysed DEBUG_PEER $DEBUG_PEER $POSTFIX_CONFIG
-[ $DEBUG_PEER == "none" ] && mysed DEBUG_PEER "" $POSTFIX_CONFIG
+# If you need to get more postfix output for a specified host normally the relayhost or misp-server
+  # if DEBUG_PEER isn't none set debug peer:
+  [ "$DEBUG_PEER" == "none" ] || mysed DEBUG_PEER $DEBUG_PEER $POSTFIX_CONFIG
+  # if DEBUG_PEER IS none delete it:
+  [ "$DEBUG_PEER" == "none" ] && mysed DEBUG_PEER "" $POSTFIX_CONFIG
 
-exit 0
+
+
 # Start Postfix
+postmap $SMTP_AUTH
+postmap $GENERIC
 /usr/lib/postfix/post-install meta_directory=/etc/postfix create-missing
 /usr/lib/postfix/master
 

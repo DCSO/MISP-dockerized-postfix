@@ -27,23 +27,25 @@ LABEL org.label-schema.build-date="${BUILD_DATE}" \
           org.label-schema.version="${VERSION}" \
           org.label-schema.schema-version="1.0.0-rc1"
 
-# Install Postfix
+# Install Packages
 RUN apk add --no-cache \
     postfix \
     mailx \
     libsasl \
     ca-certificates \
-    rsyslog \
-    runit
+    syslog-ng \
+    supervisor
 
 # Hostname for the Mailserver
 ENV HOSTNAME=misp
 # Domain for Outgoing Mail
 ENV DOMAIN=example.com
+# Sender for local postfix outgoing Mails
+ENV SENDER_ADDRESS=admin@example.com
 # Relahost to Send Mails
-ENV RELAYHOST=smtp.example.com:588
+ENV RELAYHOST=smtp.example.com:587
 # RELAY User and Password
-ENV RELAY_USER=postfix
+ENV RELAY_USER=misp
 ENV RELAY_PASSWORD=ChangeMe
 # Allow only MISP Docker Container Access
 ENV DOCKER_NETWORK=192.168.47.0/28
@@ -51,22 +53,19 @@ ENV DOCKER_NETWORK=192.168.47.0/28
 ENV DEBUG_PEER=none
 
 
-
-
-
 # Copy files to postfix container
 COPY \
     files/main.cf* \
     file/master.cf* \
     files/smtp_auth \
+    files/generic_misp \
         /etc/postfix/
+COPY files/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
+COPY files/supervisord.conf /etc/supervisor/supervisord.conf
+COPY files/entrypoint.sh /
 
-COPY files/service /etc/service
-COPY files/runit_bootstrap /usr/sbin/runit_bootstrap
-COPY files/rsyslog.conf /etc/rsyslog.conf
+# make entrypoint.sh executable for supervisord:
+RUN chmod +x /entrypoint.sh
 
-RUN chmod -R +x /usr/sbin/runit_bootstrap /etc/service
-
-STOPSIGNAL SIGKILL
-
-ENTRYPOINT ["/usr/sbin/runit_bootstrap"]
+# Execute Supervisod after start:
+CMD exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
