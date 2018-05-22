@@ -23,13 +23,6 @@
 
 ### Project Information
 
-| | |
-|-|-|
-| Travis Master | [![Build Status][1]][2] |
-| Docker Size & Layers | [![][4]][7]|
-| Latest Docker Version | [![][5]][7]|
-| Commit for Latest Docker Version | [![][6]][7]|
-
 [1]: https://travis-ci.org/DCSO/MISP-dockerized-postfix.svg?branch=master
 [2]: https://travis-ci.org/DCSO/MISP-dockerized-postfix
 [3]: https://images.microbadger.com/badges/license/dcso/misp-postfix.svg
@@ -37,6 +30,15 @@
 [5]: https://images.microbadger.com/badges/version/dcso/misp-postfix.svg
 [6]: https://images.microbadger.com/badges/commit/dcso/misp-postfix.svg
 [7]: https://microbadger.com/images/dcso/misp-postfix
+
+| | |
+|-|-|
+| Travis Master | [![Build Status][1]][2] |
+| Docker Size & Layers | [![][4]][7]|
+| Latest Docker Version | [![][5]][7]|
+| Commit for Latest Docker Version | [![][6]][7]|
+
+
 
 
 
