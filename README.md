@@ -23,21 +23,19 @@
 
 ### Project Information
 
-[1]: https://travis-ci.org/DCSO/MISP-dockerized-postfix.svg?branch=master
-[2]: https://travis-ci.org/DCSO/MISP-dockerized-postfix
-[3]: https://images.microbadger.com/badges/license/dcso/misp-postfix.svg
-[4]: https://images.microbadger.com/badges/image/dcso/misp-postfix.svg
-[5]: https://images.microbadger.com/badges/version/dcso/misp-postfix.svg
-[6]: https://images.microbadger.com/badges/commit/dcso/misp-postfix.svg
-[7]: https://microbadger.com/images/dcso/misp-postfix
-
 | | |
 |-|-|
-| Travis Master | [![Build Status][1]][2] |
-| Docker Size & Layers | [![][4]][7]|
-| Latest Docker Version | [![][5]][7]|
-| Commit for Latest Docker Version | [![][6]][7]|
+| Travis Master | [![][101]][102] |
+| Docker Size & Layers | [![][104]][107]|
+| Latest Docker Version | [![][105]][107]|
+| Commit for Latest Docker Version | [![][106]][107]|
 
+[101]: https://travis-ci.org/DCSO/MISP-dockerized-postfix.svg?branch=master
+[102]: https://travis-ci.org/DCSO/MISP-dockerized-postfix
+[104]: https://images.microbadger.com/badges/image/dcso/misp-postfix.svg
+[105]: https://images.microbadger.com/badges/version/dcso/misp-postfix.svg
+[106]: https://images.microbadger.com/badges/commit/dcso/misp-postfix.svg
+[107]: https://microbadger.com/images/dcso/misp-postfix
 
 
 
