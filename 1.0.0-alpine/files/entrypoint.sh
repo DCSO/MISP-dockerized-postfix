@@ -7,6 +7,7 @@ SMTP_AUTH="$POSTFIX_PATH/smtp_auth"
 GENERIC="$POSTFIX_PATH/generic_misp"
 
 function mysed() {
+    [ $@ = "2" ] && $3 = $2 && $2=''
     # This function replace the Keywords ($1) with the content of environment variable ($2) in the file ($3)
     sed -i 's,{'$1'},'$2',g' $3
 }
@@ -29,7 +30,7 @@ mysed DOCKER_NETWORK $DOCKER_NETWORK $POSTFIX_CONFIG
   # if DEBUG_PEER isn't none set debug peer:
   [ "$DEBUG_PEER" == "none" ] || mysed DEBUG_PEER $DEBUG_PEER $POSTFIX_CONFIG
   # if DEBUG_PEER IS none delete it:
-  [ "$DEBUG_PEER" == "none" ] && mysed DEBUG_PEER "" $POSTFIX_CONFIG
+  [ "$DEBUG_PEER" == "none" ] && mysed DEBUG_PEER $POSTFIX_CONFIG
 
 
 
