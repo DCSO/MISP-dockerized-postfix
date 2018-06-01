@@ -1,5 +1,5 @@
 #!/bin/sh
-set -ex
+set -exv
 
 POSTFIX_PATH="/etc/postfix"
 POSTFIX_CONFIG="$POSTFIX_PATH/main.cf"
@@ -7,9 +7,12 @@ SMTP_AUTH="$POSTFIX_PATH/smtp_auth"
 GENERIC="$POSTFIX_PATH/generic_misp"
 
 function mysed() {
-    [ $@ = "2" ] && $3 = $2 && $2=''
+    source=$1
+    target=$2
+    file=$3
+    [ "$#" = "2" ] && file=$2 && target=''
     # This function replace the Keywords ($1) with the content of environment variable ($2) in the file ($3)
-    sed -i 's,{'$1'},'$2',g' $3
+    sed -i 's,{'$source'},'$target',g' $file
 }
 
 # Set Environment Variables in Config
