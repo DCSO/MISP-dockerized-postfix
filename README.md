@@ -1,6 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`1.0.0-alpine`, `1.0.0`, `latest`][1]
+- [`1.0.0-alpine`, `latest`][1]
 
 [1]: https://github.com/DCSO/MISP-dockerized-postfix/blob/master/1.0.0-alpine/Dockerfile
 
