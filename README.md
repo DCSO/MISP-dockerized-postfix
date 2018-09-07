@@ -1,8 +1,10 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`1.0.0-alpine`, `latest`][1]
+- [`1.0.1-alpine`, `latest`][2]
+- [`1.0.0-alpine`][1]
 
 [1]: https://github.com/DCSO/MISP-dockerized-postfix/blob/master/1.0.0-alpine/Dockerfile
+[2]: https://github.com/DCSO/MISP-dockerized-postfix/blob/master/1.0.1-alpine/Dockerfile
 
 # Quick reference
 
@@ -32,10 +34,10 @@
 
 [101]: https://travis-ci.org/DCSO/MISP-dockerized-postfix.svg?branch=master
 [102]: https://travis-ci.org/DCSO/MISP-dockerized-postfix
-[104]: https://images.microbadger.com/badges/image/dcso/misp-postfix.svg
-[105]: https://images.microbadger.com/badges/version/dcso/misp-postfix.svg
-[106]: https://images.microbadger.com/badges/commit/dcso/misp-postfix.svg
-[107]: https://microbadger.com/images/dcso/misp-postfix
+[104]: https://images.microbadger.com/badges/image/dcso/misp-dockerized-postfix.svg
+[105]: https://images.microbadger.com/badges/version/dcso/misp-dockerized-postfix.svg
+[106]: https://images.microbadger.com/badges/commit/dcso/misp-dockerized-postfix.svg
+[107]: https://microbadger.com/images/dcso/misp-dockerized-postfix
 
 
 

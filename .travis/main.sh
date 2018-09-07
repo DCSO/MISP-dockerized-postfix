@@ -29,9 +29,9 @@ setup_dependencies() {
   echo "INFO:  Setting up dependencies."
   echo "#########################################################"
 
-  sudo apt-get update -y
-  sudo apt-get install realpath python python-pip -y
-  sudo apt-get install --only-upgrade docker-ce -y
+  apt-get update -y
+  apt-get install realpath python python-pip -y
+  apt-get install --only-upgrade docker-ce -y
 
   #sudo pip install docker-compose || true
 
@@ -59,7 +59,7 @@ update_docker_configuration() {
   "max-concurrent-downloads": 50,
   "max-concurrent-uploads": 50
 }' | sudo tee /etc/docker/daemon.json
-  sudo service docker restart
+  service docker restart
 }
 
 main
