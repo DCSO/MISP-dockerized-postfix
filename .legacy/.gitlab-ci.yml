@@ -1,0 +1,9 @@
+build_alpine_1.0.1:
+  extends: .build
+  variables:
+   VERSION: "1.0.1-alpine"
+
+build_alpine_1.0.0:
+  extends: .build
+  variables:
+   VERSION: "1.0.0-alpine"

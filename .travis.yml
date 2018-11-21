@@ -10,6 +10,9 @@ env:
   # Docker Hub Token
   - secure: "dlfMtawhJAv2KKz57b22ct4pytuZK3W0BQbekEOpzdR387Qrce2Pi/iKGXzUjBqkrOUyhy5nm5WxUoJ+4K5LsXL/htCnKOPN1hdPZBHH/8UsipmYbX29OX+aF0fQssndm+V3bAyzXk1o79gUNxkOq6ZwHgTCwi8qib/o0F1Dk/1ZiH9HHairqUMO8Pxlm+SPQTZEClQqvFlP9aWQ34i+4U4vV+SbcA1BUfdsn44D9kQS/lQm7cIFa1k/jjDGDn+tcI+aKRSsQ2C3uNaSSaYspgxBPDHbPbj5W0H1hN4SdDJYNRoE7mNORAey5JVvLClG782oc3YzEwD7QjnKhBob26ICI1qmS6Uxx5v044hdkQyJIqDj7BxHfxUT1xXrdKtYt7UEzJAo/q76VAJNzTfgg47EdnYS5RBWmmnltZ17f2LDfYoMaxrQXlhglL6BNcHP4pE+1XkXDc69G9oTTuP9X+bGVKcVlm13dbUAjgeJ7B0XZsc/27wkKQQl8j0bICA1KiaDOBybfdy1urn7/C54nlADcNqSctWiiz1en+jzuslGYhvBUGdoIVtDjwfC23OpNp7Juqw3o4RjGoXi27jG78DnDCpNSZMS07Yihl7yqdNb1fl11e8WV/kirGy8kTZOvXuU9k4UBztMJ/Q2Dj/wiCPosYdns/oefTySA4+5TqY="
   matrix:
+  - VERSION=1.0-alpine
+  - VERSION=1.1-alpine
+  # legacy
   - VERSION=1.0.0-alpine
   - VERSION=1.0.1-alpine
 
